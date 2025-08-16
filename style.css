@@ -1,0 +1,115 @@
+:root{
+  --size: 140px;      /* Katta yurak o‘lchami */
+  --color: #e63946;   /* Yurak rangi */
+  --bg: #f7f7f7;      /* Fon */
+}
+
+* { box-sizing: border-box; }
+body{
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  font-family: system-ui, sans-serif;
+}
+
+.stage{
+  position: relative;
+  width: 340px;
+  height: 340px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;            /* Tashqariga chiqib ketgan zarrachalarni yashiradi */
+}
+
+/* Katta yurak */
+.heart{
+  width: var(--size);
+  height: var(--size);
+  background: var(--color);
+  transform: translate(-50%,-50%) rotate(-45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+}
+.heart::before,
+.heart::after{
+  content:"";
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background: var(--color);
+  border-radius: 50%;
+}
+.heart::before{
+  top: calc(-0.5 * var(--size));
+  left: 0;
+}
+.heart::after{
+  top: 0;
+  left: calc(0.5 * var(--size));
+}
+
+/* Emitter (ko‘rinmaydi), yurakning pastki uchidan biroz orqaroqda */
+.emitter{
+  position: absolute;
+  top: calc(50% + var(--size) * 0.75);   /* yurak uchidan pastroqqa sal */
+  left: 50%;
+  width: 6px; 
+  height: 6px;
+  transform: translate(-50%, -50%);
+  opacity: 0; /* ko‘rinmasin */
+}
+
+/* Mini yurak zarracha — JS bilan dinamik yaratiladi */
+.particle{
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Mini yurak shakli (kvadrat + 2 doiracha) */
+.mini-heart{
+  width: var(--s);
+  height: var(--s);
+  background: var(--c, var(--color));
+  transform: rotate(-45deg);
+  border-radius: 4px;
+  position: relative;
+}
+.mini-heart::before,
+.mini-heart::after{
+  content:"";
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  background: var(--c, var(--color));
+  border-radius: 50%;
+}
+.mini-heart::before{
+  top: calc(-0.5 * var(--s));
+  left: 0;
+}
+.mini-heart::after{
+  top: 0;
+  left: calc(0.5 * var(--s));
+}
+
+/* Hoverda katta yurak “urib” tursin (ixtiyoriy) */
+.heart:hover{
+  animation: beat 0.6s ease-in-out infinite;
+}
+@keyframes beat{
+  0%,100%{ transform: translate(-50%,-50%) rotate(-45deg) scale(1); }
+  50%    { transform: translate(-50%,-50%) rotate(-45deg) scale(1.06); }
+}
+
+.Sarvinozim{
+padding: 15px;
+    background-color: green;
+    color: white;
+    
+}
